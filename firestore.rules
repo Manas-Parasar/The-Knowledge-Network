@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read their own data and create their own document, admins can read/write everything
+    match /users/{userId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || request.auth.token.email == 'theknowledgenetwork2025@gmail.com');
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update, delete: if request.auth != null && (request.auth.uid == userId || request.auth.token.email == 'theknowledgenetwork2025@gmail.com');
+    }
+
+    // Schools: everyone can read, only admin can write
+    match /schools/{schoolId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email == 'theknowledgenetwork2025@gmail.com';
+    }
+
+    // Events: everyone can read, only admin can write
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email == 'theknowledgenetwork2025@gmail.com';
+    }
+
+    // Donations: everyone can read, only admin can write
+    match /donations/{donationId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email == 'theknowledgenetwork2025@gmail.com';
+    }
+
+    // Sponsors: everyone can read, only admin can write
+    match /sponsors/{sponsorId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email == 'theknowledgenetwork2025@gmail.com';
+    }
+
+    // Clubs: everyone can read, only admin can write
+    match /clubs/{clubId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email == 'theknowledgenetwork2025@gmail.com';
+    }
+
+    // Archives: only admin can read/write
+    match /archives/{year} {
+      allow read, write: if request.auth != null && request.auth.token.email == 'theknowledgenetwork2025@gmail.com';
+    }
+
+    // Website content: everyone can read, only admin can write
+    match /website/{document} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email == 'theknowledgenetwork2025@gmail.com';
+    }
+
+    // Slots subcollection under schools: everyone can read, authenticated users can update (for signups)
+    match /schools/{schoolId}/slots/{slotId} {
+      allow read: if true;
+      allow update: if request.auth != null;
+      allow write: if request.auth != null && request.auth.token.email == 'theknowledgenetwork2025@gmail.com';
+    }
+  }
+}

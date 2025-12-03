@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body,
+  html,
+  #root {
+    @apply m-0 p-0 w-full h-full overflow-x-hidden;
+  }
+
+  body {
+    background: linear-gradient(135deg, #0072ce 0%, #3bb273 50%, #ffd700 100%);
+    background-attachment: fixed;
+  }
+
+  /* Consistent card styling across all pages */
+  .card-section {
+    @apply bg-white/90 shadow-lg rounded-2xl mx-6 md:mx-10;
+  }
+
+  .card-content {
+    @apply bg-gradient-to-br from-white/90 to-white/95 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105;
+  }
+
+  /* Section dividers */
+  .section-divider {
+    @apply w-full mx-6 md:mx-10 my-8;
+  }
+
+  .section-divider-primary {
+    @apply h-px bg-gradient-to-r from-transparent via-primary to-transparent;
+  }
+
+  .section-divider-secondary {
+    @apply h-px bg-gradient-to-r from-transparent via-secondary to-transparent;
+  }
+
+  .section-divider-accent {
+    @apply h-px bg-gradient-to-r from-transparent via-accent to-transparent;
+  }
+}
+
+:root {
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
